@@ -1,18 +1,15 @@
 {
   "name": "resume-builder",
-  "description": "AI-powered resume builder with job discovery, dual ATS + HR scoring, and cover letter generation. Finds and ranks live job listings by fit, tailors your resume to any JD, auto-detects 6+ professional domains, and produces Workday-compatible DOCX output.",
-  "version": "1.2.0",
+  "description": "AI-powered resume builder with job discovery, dual ATS + HR scoring, and cover letter generation. Tailors your resume to any JD and produces Workday-compatible DOCX output, plus an optional RenderCV flow: tailor a RenderCV YAML into a styled PDF and a matching ATS DOCX from a single source.",
+  "version": "1.3.0",
   "author": {
     "name": "Resume Builder Contributors",
     "email": "",
     "url": "https://github.com/jananthan30"
   },
   "license": "MIT",
-  "homepage": "https://github.com/jananthan30/Resume-Builder",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jananthan30/Resume-Builder.git"
-  },
+  "homepage": "https://github.com/joaomedeiros95/Resume-Builder",
+  "repository": "https://github.com/joaomedeiros95/Resume-Builder.git",
   "keywords": [
     "resume",
     "cover-letter",

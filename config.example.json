@@ -7,6 +7,11 @@
   "user_phone": "555-123-4567",
   "user_linkedin": "linkedin.com/in/your-profile",
 
+  "_rendercv_comment": "Only needed for /resume-builder:tailor-rendercv (RenderCV YAML -> styled PDF + ATS DOCX). master_yaml_path is your RenderCV source; rendercv_command is how to invoke rendercv; python_command is a Python that has PyYAML + python-docx + the scorer deps (use an absolute path if bare 'python' is version-pinned in this repo).",
+  "master_yaml_path": "YOUR_MASTER_CV.yaml",
+  "rendercv_command": "./.venv/bin/rendercv",
+  "python_command": "python3",
+
   "_validated_tools_comment": "List ONLY tools you've actually used hands-on. The tailoring workflow uses this whitelist to refuse adding tools you don't have. Mark partial exposure inline: 'Veeva Vault (trainable)', 'Argus (coursework)'. Examples below — replace with yours.",
   "validated_tools": [
     "Microsoft Office Suite",
