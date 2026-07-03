@@ -103,20 +103,26 @@ lead-in markdown, flattens competencies into keywords). Single source = the YAML
 
 ## PHASE 5: SCORE + ITERATE (max 2 rounds)
 
-Score the rendered Markdown (`{folder}/_render/<cv.name>_CV.md`) against the JD:
-```
-curl -s -X POST http://localhost:8100/score/both -H "Content-Type: application/json" \
-  -d "{\"resume_path\": \"{folder}/_render/<cv.name>_CV.md\", \"jd_path\": \"{folder}/job_description.txt\"}"
-```
-(Fallback: CLI scorers.) Also score the master's rendered Markdown once for the base comparison.
+Score the **generated DOCX from Phase 4** — NOT the RenderCV Markdown. The scorers are tuned for
+the ATS DOCX format; RenderCV's `#`/`**`/`*` markup makes the HR scorer auto-reject (false HR=0).
+The DOCX is the ATS-format text the scorers understand.
 
 ```
-IF ATS < 75:  add JD keywords to core_competencies; reframe 1–2 bullets → re-render (Phase 3) → re-score
-IF ATS ≥ 75 AND HR < 70:  strengthen bullet impact/metrics → re-render → re-score
+{python_command} ats_scorer.py --score "{folder}/{Name}_Resume_{Company}.docx" "{folder}/job_description.txt" --json
+{python_command} hr_scorer.py  --score "{folder}/{Name}_Resume_{Company}.docx" "{folder}/job_description.txt" --json
+```
+For the base comparison, convert the master YAML once with `rendercv_to_docx.py` and score that DOCX.
+
+```
+IF ATS < 75:  add authentic JD keywords to core_competencies; reframe 1–2 bullets in the YAML
+              → re-render (Phase 3) → regenerate DOCX (Phase 4) → re-score
+IF ATS ≥ 75 AND HR < 70:  strengthen bullet impact/metrics → re-render → regenerate DOCX → re-score
 IF ATS ≥ 75 AND HR ≥ 70:  PASS
 ```
-Each iteration edits the YAML, re-renders, re-scores. After a passing (or 2nd) round, regenerate
-the DOCX (Phase 4) so it matches the final YAML.
+Each iteration edits the YAML, re-renders, and **regenerates the DOCX** so YAML/PDF/DOCX stay in
+sync. If the JD over-indexes on skills the candidate authentically lacks (niche tools, unrelated
+domains), ATS may plateau below 75 — accept once HR passes and every authentic keyword is placed.
+Never add unconfirmed tools to push the number.
 
 ---
 
